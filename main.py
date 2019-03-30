@@ -1,7 +1,7 @@
 import pygame
 # based on http://www.petercollingridge.co.uk/tutorials/pygame-physics-simulation/
 from particle import *
-
+import random as r
 
 # set up some vars to use
 screenSize = (width, height) = (300, 200)
@@ -19,8 +19,18 @@ screen.fill(background_colour)
 # set the name and display
 pygame.display.set_caption('Physics Simulation')
 
-my_first_particle = Particle(150, 50, 50, screen)
-my_first_particle.display()
+# particles
+numParticles = 10
+pList = []
+for p in range(numParticles):
+    size = r.randint(10,20)
+    x = r.randint(size, width - size)
+    y = r.randint(size, height - size)
+    pList.append(Particle(x,y,size,screen))
+
+for particle in pList:
+    particle.display()
+
 
 pygame.display.flip()
 
