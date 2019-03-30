@@ -1,30 +1,26 @@
 import pygame
+import math
+# our main particle class
+class Particle:
+
+    def __init__(self, x, y, size, screen):
+        self.x = x
+        self.y = y
+        self.size = size
+        self.color = (0, 0, 255)
+        self.thickness = 2
+        self.screen = screen
+        self.speed = 0.01
+        self.angle = 0
+
+    def display(self):
+        pygame.draw.circle(self.screen, self.color, (self.x, self.y), self.size, self.thickness)
 
 
-# based on http://www.petercollingridge.co.uk/tutorials/pygame-physics-simulation/
+    def move(self):
 
-# set up some vars to use
-screenSize = (width, height) = (300, 200)
-screen = pygame.display.set_mode((width, height))
 
-# some colours
-red = (255, 0, 0)
-black = (0, 0, 0)
-white = (255,255,255)
-grey = (122, 122, 122)
-background_colour = grey
-
-screen.fill(background_colour)
-
-# set the name and display
-pygame.display.set_caption('Physics Simulation')
-pygame.display.flip()
-
-running = True
-# main event loop
-while running:
-    # detect quit and leave main loop
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
+        self.x += math.sin(self.angle) * self.speed
+        self.y -= math.cos(self.angle) * self.speed
+        self.x = int(self.x)
+        self.y = int(self.y)
